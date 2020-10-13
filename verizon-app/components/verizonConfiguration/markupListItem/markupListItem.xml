@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="MarkupListItem" extends="Group" >
+
+    <interface>
+        <field id="itemContent" type="node" onChange="showcontent" />
+        <field id="focusPercent" type="float" onChange="showfocus" />
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/components/VerizonConfiguration/Markuplistitem/Markuplistitem.brs"/>
+
+    <children>
+        <group id="selectGroup" visible="false">
+            <label id="selectLabel" font="font:SmallestSystemFont" color="0x757575FF" />
+            <label id="selectValueLabel" font="font:SmallestBoldSystemFont" color="0xFFC107FF" />
+        </group>
+        <group id="checkboxGroup" visible="false">
+            <Poster
+                id = "switcher"
+                uri="pkg:/images/switcherOff.png"
+                width = "96"
+                height = "96" />
+            <label id="checkboxLabel" translation="[100,0]" font="font:SmallestSystemFont" color="0x757575FF" />
+        </group>
+        <group id="buttonGroup" visible="false">
+            <Rectangle
+                id="buttonBackground"
+                color="0xFFC107FF" />
+            <label id="buttonLabel" translation="[100,0]" font="font:SmallestBoldSystemFont" color="0xF5F5F5FF" />
+        </group>
+
+        <Rectangle
+            id="itemCursor"
+            width="500"
+            height="6"
+            color="0xFFC107FF"
+            opacity="0.0" />
+    </children>
+
+</component>

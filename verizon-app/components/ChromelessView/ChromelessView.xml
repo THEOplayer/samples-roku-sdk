@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="ChromelessView" extends="Group" initialFocus="ButtonPlay">
+
+    <interface>
+
+        <function name="eventCallbackHandler"/>
+        <function name="callbackOnEventPlayerCanplay"/>
+        <function name="callbackOnEventPlayerDurationchange"/>
+        <function name="callbackOnEventPlayerPlaying"/>
+        <function name="callbackOnEventPlayerSeeked"/>
+        <function name="callbackOnEventPlayerSeeking"/>
+        <function name="callbackOnEventPlayerSourcechange"/>
+        <function name="callbackOnEventPlayerTimeupdate"/>
+
+        <function name="callbackOnEventPlayerVerizonAdbegin"/>
+        <function name="callbackOnEventPlayerVerizonPreplayresponse"/>
+
+        <function name="destroy"/>
+        <function name="show"/>
+
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/components/utils.brs"/>
+    <script type="text/brightscript" uri="pkg:/components/ChromelessView/ChromelessView.brs"/>
+
+    <children>
+        <THEOsdk:THEOplayer id="VideoPlayerChromeless" controls="false" />
+
+        <Rectangle id="SkipAdRectangle" color="0xFFFFFF" visible="false" opacity="0.8" width="300" height="80">
+            <Button id="SkipAdButton" textColor="0x000000" minWidth="200" maxWidth="300" opacity="1" height="80" iconUri="" focusedIconUri="" focusBitmapUri="pkg:/images/bg.png" text="Skip Ad"/>
+        </Rectangle>
+
+        <BusySpinner id="BusySpinner" visible="false" uri="pkg:/images/busyspinner.png"/>
+
+        <Group id="playerOverlay">
+            <Group id="GroupOptions">
+                <Rectangle id="OptionsBackground" color="0x000000FF" height="47" width="10" opacity="0.5"/>
+                <Rectangle id="TimelineBackground" height="3" width="0" opacity="0.2"/>
+                <Rectangle id="TimelineProgress" height="3" width="0" color="0xFFC713FF"/>
+
+                <Timer id="HideOptionsTimer" repeat="false" duration="5"/>
+
+                <ButtonGroup id="ButtonGroupOptions" layoutDirection="horiz">
+                    <Button id="ButtonSeekBackward" iconUri="" focusBitmapUri="pkg:/images/focusBG.png" focusedIconUri="" maxWidth="115" minWidth="115" height="95" opacity="0.9" scale="[0.5,0.5]">
+
+                        <Poster width="75" height="65" id="backwardIcon" uri="pkg:/images/backward.png" translation="[20,15]" opacity="0.9"/>
+                    </Button>
+                    <Button id="ButtonPlay" iconUri="" focusBitmapUri="pkg:/images/focusBG.png" focusedIconUri="" maxWidth="115" minWidth="115" height="95" opacity="0.9" scale="[0.5,0.5]">
+
+                        <Poster width="75" height="65" id="playIcon" uri="pkg:/images/play.png" translation="[20,15]" opacity="0.9"/>
+                    </Button>
+                    <Button id="ButtonSeekForward" iconUri="" focusBitmapUri="pkg:/images/focusBG.png" focusedIconUri="" maxWidth="115" minWidth="115" height="95" opacity="0.9" scale="[0.5,0.5]">
+
+                        <Poster id="forwardIcon" uri="pkg:/images/forward.png" width="75" height="65" translation="[20,15]" opacity="0.9"/>
+                    </Button>
+                </ButtonGroup>
+
+                <Label font="font:SmallestSystemFont" id="LabelPosition" text="00:00:00 / 00:00:00"/>
+            </Group>
+
+            <Group id="SettingsOptions" visible="false">
+                <Rectangle id="SettingsBackground" color="0x000000FF" width="500" height="215" translation="[-15,0]" opacity="0.5"/>
+                <Rectangle id="SettingsHeaderBackground" color="0xFFC713FF" width="500" height="65" translation="[-15,0]">
+                    <Label text="Settings" height="65" width="470" horizAlign="center" vertAlign="center" font="font:SmallestBoldSystemFont"/>
+                </Rectangle>
+
+                <Timer id="HideSettingsTimer" repeat="false" duration="5"/>
+
+                <ButtonGroup id="ButtonGroupSettings" layoutDirection="vert" vertAlignment="top" translation="[0,65]" opacity="1">
+                    <Button
+                        id="ButtonCategoryFirst"
+                        iconUri=""
+                        focusedIconUri=""
+                        focusBitmapUri="pkg:/images/focusBG.png"
+                        maxWidth="470"
+                        minWidth="470"
+                        height="65"
+                        opacity="0.9"
+                        text="Captions"
+                        focusedTextColor="0xFFFFFFFF"
+                        textFont="font:SmallestBoldSystemFont"
+                        focusedTextFont="font:SmallestBoldSystemFont"></Button>
+                    <Button
+                        id="ButtonCategorySecond"
+                        iconUri=""
+                        focusedIconUri=""
+                        focusBitmapUri="pkg:/images/focusBG.png"
+                        maxWidth="470"
+                        minWidth="470"
+                        height="65"
+                        opacity="0.9"
+                        text="Audio Tracks"
+                        focusedTextColor="0xFFFFFFFF"
+                        textFont="font:SmallestBoldSystemFont"
+                        focusedTextFont="font:SmallestBoldSystemFont"></Button>
+                </ButtonGroup>
+            </Group>
+
+            <Group id="CategoryFirstOptions" visible="false">
+                <Rectangle id="CategoryFirstBackground" color="0x000000FF" width="300" height="0" opacity="0.5"/>
+                <Rectangle id="CategoryFirstHeaderBackground" color="0xFFC713FF" width="300" height="65">
+                    <Label text="Captions" height="65" width="300" horizAlign="center" vertAlign="center" font="font:SmallestBoldSystemFont"/>
+                </Rectangle>
+
+                <RadioButtonList
+                    id="ButtonGroupCategoryFirst"
+                    opacity="1"
+                    focusBitmapUri="pkg:/images/focusBG.png"
+                    focusedColor="0xFFFFFFFF"
+                    color="0xFFFFFFFF"
+                    itemSize="[300,65]"
+                    translation="[0,65]">
+                </RadioButtonList>
+            </Group>
+            <Group id="CategorySecondOptions" visible="false">
+                <Rectangle id="CategorySecondBackground" color="0x000000FF" width="300" height="0" opacity="0.5"/>
+                <Rectangle id="CategorySecondHeaderBackground" color="0xFFC713FF" width="300" height="65">
+                    <Label text="Audio Tracks" height="65" width="300" vertAlign="center" horizAlign="center" font="font:SmallestBoldSystemFont"/>
+                </Rectangle>
+
+                <RadioButtonList
+                    id="ButtonGroupCategorySecond"
+                    opacity="1"
+                    focusBitmapUri="pkg:/images/focusBG.png"
+                    focusedColor="0xFFFFFFFF"
+                    color="0xFFFFFFFF"
+                    itemSize="[300,65]"
+                    translation="[0,65]">
+                </RadioButtonList>
+            </Group>
+        </Group>
+
+        <Animation id="OptionsBarAnimationFadeOut" duration="0.3" repeat="false" optional="false" easeFunction="linear">
+            <FloatFieldInterpolator id="OptionsBarFadeOut" key="[0.0, 1.0]" keyValue="[ 1.0, 0.0]" fieldToInterp="playerOverlay.opacity"/>
+        </Animation>
+        <Animation id="OptionsBarAnimationFadeIn" duration="0.3" repeat="false" optional="false" easeFunction="linear">
+            <FloatFieldInterpolator id="OptionsBarFadeIn" key="[0.0, 1.0]" keyValue="[ 0.0, 1.0]" fieldToInterp="playerOverlay.opacity"/>
+        </Animation>
+
+        <VerizonConfiguration id="VerizonConfiguration" width="500"/>
+    </children>
+</component>

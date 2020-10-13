@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="MarkupListContentNode" extends="ContentNode" >
+
+    <interface>
+        <field id="type" type="string"/>
+        <field id="options" type="string"/>
+        <field id="value" type="string"/>
+    </interface>
+
+    <children>
+    </children>
+
+</component>

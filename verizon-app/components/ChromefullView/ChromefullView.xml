@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="ChromefullView" extends="Group" initialFocus="VideoPlayerChromefull">
+    <interface>
+
+        <function name="eventCallbackHandler"/>
+        <function name="callbackOnEventPlayerVerizonPreplayresponse"/>
+
+        <function name="destroy"/>
+        <function name="show"/>
+
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/components/ChromefullView/ChromefullView.brs"/>
+
+    <children>
+        <THEOsdk:THEOplayer id="VideoPlayerChromefull"/>
+    </children>
+</component>

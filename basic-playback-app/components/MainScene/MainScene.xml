@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="MainScene" extends="Scene">
+
+    <interface>
+
+        <field id="eventChromeless" type="intarray" alwaysNotify="true" alias="ButtonChromeless.buttonSelected"/>
+        <field id="eventChromefull" type="intarray" alwaysNotify="true" alias="ButtonChromefull.buttonSelected"/>
+
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/components/MainScene/MainScene.brs"/>
+
+    <children>
+        <ComponentLibrary id="THEOsdk" uri="pkg:/components/THEOplayerSDK.pkg" />
+
+        <Rectangle color="0xffffff11" width="1920" height="1080"/>
+
+        <Poster id="Logo" uri="pkg:/images/logo.png" scale="[0.15, 0.15]" translation="[30,35]"/>
+
+        <Group id="GroupPlayerConfig">
+
+            <ButtonGroup id="buttonGroupOptions" layoutDirection="horiz">
+                <Button id="ButtonChromeless" minWidth="350" maxWidth="350" height="80" opacity="0.8" iconUri="" focusedIconUri="" text="Chromeless"/>
+                <Button id="ButtonChromefull" minWidth="350" maxWidth="350" height="80" opacity="0.8" iconUri="" focusedIconUri="" text="Chromefull"/>
+            </ButtonGroup>
+
+        </Group>
+
+    </children>
+</component>

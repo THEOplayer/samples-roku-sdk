@@ -1,0 +1,8 @@
+# catalog commonly used by roku ide plugins to store zip and pkg files
+out
+
+# catalog for ide
+.settings
+
+# catalog for vscode ide
+.vscode

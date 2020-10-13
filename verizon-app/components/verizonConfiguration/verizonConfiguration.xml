@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="VerizonConfiguration" extends="Rectangle" initialFocus="firstPanelChecklist" >
+
+    <interface>
+
+        <field id="lostFocus" type="string"/>
+        <field id="source" type="assocarray"/>
+        <field id="configuration" type="assocarray"/>
+        <field id="currentTab" type="string"/>
+
+        <function name="manageFocus"/>
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/components/VerizonConfiguration/VerizonConfiguration.brs"/>
+
+    <children>
+        <Timer id="changeSourceTimer" repeat="false" duration="1"/>
+        <Rectangle id="configurationHeader" width="500">
+            <label id="drmHeader" font="font:SmallestSystemFont" text="MULTI-ASSET DRM" horizAlign="center" width="300" color="0x757575FF"/>
+            <label id="adsHeader" font="font:SmallestSystemFont" text="ADS" horizAlign="center" width="100" color="0x757575FF"/>
+            <label id="liveHeader" font="font:SmallestSystemFont" text="LIVE" horizAlign="center" width="100" color="0x757575FF"/>
+            <Rectangle
+                id="headerCursor"
+                height="6"
+                color="0xFFC107FF"/>
+        </Rectangle>
+        <Rectangle id="verizonLogoContainer" width="500">
+            <Poster
+                id = "switcher"
+                uri="pkg:/images/verizon_logo.png"
+                width = "152"
+                height = "86" />
+            <Rectangle
+                id="verizonLogoVerticalSeparator"
+                width="1"
+                color="0xBBBBBBFF"/>
+            <Rectangle
+                id="verizonLogoHorizontalSeparator"
+                height="1"
+                color="0xBBBBBBFF"/>
+        </Rectangle>
+
+        <Rectangle id="theoLogoContainer" height="85" color="0xF5F5F5FF">
+            <Poster id="theoLogo" uri="pkg:/images/logo.png" scale="[0.10, 0.10]" translation="[30,15]"/>
+        </Rectangle>
+
+        <Rectangle visible="false" id="drmGroup" width="500">
+            <MarkupList id="drmList" itemComponentName="MarkupListItem" drawFocusFeedback="false" itemSize="[500,96]">
+            </MarkupList>
+        </Rectangle>
+        <Rectangle id="adsGroup" width="500">
+            <MarkupList id="adsList" itemComponentName="MarkupListItem" drawFocusFeedback="false" itemSize="[500,96]">
+            </MarkupList>
+        </Rectangle>
+        <Rectangle visible="false" id="liveGroup" width="500">
+            <MarkupList id="liveList" itemComponentName="MarkupListItem" drawFocusFeedback="false" itemSize="[500,96]">
+            </MarkupList>
+        </Rectangle>
+
+    </children>
+</component>

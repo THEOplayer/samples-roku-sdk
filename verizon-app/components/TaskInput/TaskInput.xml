@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<component name="TaskInput" extends="Task">
+    <interface>
+            <field id="data" type="assocarray" />
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/components/TaskInput/TaskInput.brs" />
+</component>
