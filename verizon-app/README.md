@@ -1,63 +1,42 @@
-# Table of content
+# verizon-app
+This is a sample Roku channel utilizing the THEOplayer Roku SDK.
+This channel is focused on the Verizon-based sources.
 
-1. [** Description**](#description)
+Table of contents:
 
-2. [** Project's directory structure**](#projects-directory-structure)
+1. [Directory structure](#directory-structure)
+2. [Setup guide](#setup-guide)
+3. [How to configure the reference app](#how-to-configure-the-reference-app)
 
-3. [** Setup guide**](#setup-guide)
+The THEOplayer Roku SDK integrates features offered by the Verizon Media Platform, as demonstrated by this reference application.
 
-4. [** How to build THEOplayerSDK and reference app**](#how-to-build-theoplayersdk-and-reference-app)
-    - [**How to build THEOplayerSDK**](#how-to-build-theoplayersdk)
-    - [**How to build reference app**](#how-to-build-reference-app)
-
-## Description
-This is a sample Roku channel utilizing the THEOplayerSDK, this channel is focused on the Verizon-based sources.
-THEOplayerSDK is a custom component allowing channel developers to easily embed the THEOplayer in a channel.
-The component is based on the native Roku video player.
-THEOplayerSDK integrates the Verizon Media API, In this reference application you can see capabilities of the Verizon Media API.
 The channel presents a THEOplayer with two main options:
 
- - chromeless
- - chromefull
+ - chromeless: view THEOplayer without the default playback controls.
+ - chromefull: view THEOplayer with the default, slightly customized Roku Video UI.
 
-The first option allows to view THEOplayer without the playback controls.
-The second allows to view THEOplayer with the default, slightly customized Roku Video UI.
-
-## Project's directory structure
- - `build` directory contains the compressed Verizon playback reference application.
+## Directory structure
  - `components` contains all the components of basic Verizon reference application.
  - `images` directory contains the channel artworks.
- - `source` directory contains the 'main.brs' file, a starting point for the Roku channel.
+ - `source` directory contains the `main.brs` file, a starting point for the Roku channel.
  - `manifest` file is required by Roku platform, contains the configuration of Roku channel.
- - `README.md` and `RELEASE.md` files are available in root folder.
+ - `README.md` file is available in the root folder.
 
 ## Setup guide
-1. Install some IDE e.g. Atom with Roku/Brightscript plugins.
-2. Connect the Roku device and turn on the developer mode: https://blog.roku.com/developer/developer-setup-guide (in order to upload application zip through the GUI in the browser).
 
-## How to build THEOplayerSDK and reference app
-### How to build THEOplayerSDK
-1. Clone THEOplayerSDK repository - https://bitbucket.org/r8szq0vy/theoplayer-roku-sdk/src/master/.
-2. Go to repository and find the manifest file (`src/manifest`).
-3. Change the `verizon_support` flag to desired value (`true`).
-4. Enter the `src` folder and zip all the contents.
-5. Open browser (chrome, safari etc.).
-6. Go to the Roku device IP address (Development Application Installer), type in the Roku developer username and password.
-7. Make sure you are in the Installer tab (top right corner), Upload zip file created in step 4, press replace or install button.
-8. Go to the Packager tab (top right corner), if there is no Packager option please generate a developer key in the console.
-https://developer.roku.com/en-gb/docs/developer-program/publishing/packaging-channels.md
-9. Enter the app name as "THEOsdk" and the password generated for the specific device id.
-10. After submit, a link should appear - download THEOplayer package.
+1. Open this `verizon-app` folder in an editor. (e.g. Atom/Visual Studio/Eclipse with Roku and/or BrightScript plugins)
+2. Have a Roku device with [developer mode](https://blog.roku.com/developer/developer-setup-guide) turned on.
 
-### How to build reference app
-1. Clone reference app repository - https://bitbucket.org/r8szq0vy/roku-reference-app/src/master/.
-2. Get .pkg file (generate it as stated in previous section).
-3. Place the downloaded package into `verizon-app/components/` and rename it as "THEOplayerSDK.pkg".
-4. Paste the THEOplayer license in the chosen reference application files instead of the blank string:
-```brightscript
-m.player.configuration = {
-    "license": ""
-}
-```
-5. Go to `verizon-app/` and compress all the folders and files (except for `build/`, `README.md` and `RELEASE.md`).
-6. Upload the compressed file into installer as stated in previous section.
+## How to configure the reference app
+1. Clone (or download) this repository.
+2. Get the THEOplayer Roku SDK from [https://portal.theoplayer.com](https://portal.theoplayer.com). The SDK is a `.pkg` package.
+3. Place the downloaded package into `verizon-app/components/` and rename it to `THEOplayerSDK.pkg`.
+4. Paste the THEOplayer license in `verizon-app/components/ChromefullView/ChromefullView.brs` and `verizon-app/components/ChromelessView/ChromelessView.brs` instead of the blank string:
+    ```brightscript
+    m.player.configuration = {
+        "license": ""
+    }
+    ```
+   
+Documentation on how to deploy (or publish) this reference application is excluded. 
+Refer to Roku's article on ["Developer environment setup"](https://developer.roku.com/docs/developer-program/getting-started/developer-setup.md) for more information.

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="HelloWorld" extends="Scene">
+  <interface>
+    <function name="onPlaying"/>
+  </interface>
+  <children>
+    <ComponentLibrary id="THEOsdk" uri="pkg:/THEOplayerSDK.pkg"/>
+    <Group id="THEOplayerContainer"></Group>
+  </children>
+<script type="text/brightscript">
+<![CDATA[
+  function Init()
+    m.THEOsdk = m.top.findNode("THEOsdk")
+    m.THEOsdk.observeField("loadStatus", "THEOsdkLoaded")
+  end function
+  function THEOsdkLoaded()
+    m.THEOplayer = CreateObject("RoSGNode","THEOsdk:THEOplayer")
+    m.playerContainer = m.top.findNode("THEOplayerContainer")
+    m.playerContainer.appendChild(m.THEOplayer)
+    m.THEOplayer.configuration = {
+      "license": ""
+    }
+    m.THEOplayer.source = {
+      "sources": [
+        {
+          "src": "https://cdn.theoplayer.com/video/star_wars_episode_vii-the_force_awakens_official_comic-con_2015_reel_(2015)/index.m3u8",
+          "type": "application/x-mpegURL"
+        }
+      ]
+    }
+    m.THEOplayer.setFocus(true)
+    m.THEOplayer.listener = m.top
+    m.THEOplayer.callFunc("addEventListener", "playing", "onPlaying")
+    m.THEOplayer.callFunc("play")
+  end function
+
+  function onPlaying(params)
+    print("I am playing")
+    print(params)
+    m.THEOplayer.callFunc("removeEventListener", "playing", "onPlaying")
+  end function
+]]>
+</script>
+</component>
