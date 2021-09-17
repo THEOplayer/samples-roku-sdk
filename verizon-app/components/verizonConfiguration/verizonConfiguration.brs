@@ -262,12 +262,12 @@ function changeSource(list, dataObj, id)
                     "contentProtected": true,
                     "id": "3c367669a83b4cdab20cceefac253684",
                     "integration": "verizon-media",
-                    "preplayParameters": {
-                    "ad": "cleardashnew",
-                        "ad.cping": "1",
-                        "ad.pingf": "4",
-                        "manifest": "mpd"
-                    }
+                    "preplayParameters": [
+                        {"ad": "cleardashnew"},
+                        {"ad.cping": "1"},
+                        {"ad.pingf": "4"},
+                        {"manifest": "mpd"}
+                    ]
                 }
             ],
             "live": true
