@@ -273,9 +273,10 @@ function changeSource(list, dataObj, id)
             "live": true
         }
     end if
-    m.source = source
     m.configuration = configuration
     m.configurationChanged = true
+    m.source = source
+
 end function
 
 function restartSourcetTimer()

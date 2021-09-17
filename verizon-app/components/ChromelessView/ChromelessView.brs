@@ -565,8 +565,6 @@ function show(fireBeacon as Boolean, adMarkers=false)
     }
     showSpinner()
 
-    m.player.source = source
-
     m.player.configuration = {
         "verizonMedia": {
             "onSeekOverAd": "play-all", 'available values: "play-none", "play-all", "play-last"
@@ -581,6 +579,8 @@ function show(fireBeacon as Boolean, adMarkers=false)
         ' license field needs to be filled in order to run THEOplayerSDK
         "license": ""
     }
+    m.player.source = source
+
     m.buttonPlay.setFocus(true)
     if not _getIsLive()
         OnEventPlay()
@@ -906,8 +906,9 @@ function onVerizonConfigurationChanged()
     verizonConfiguration = m.VerizonConfiguration.configuration
     configuration.verizonMedia = verizonConfiguration
 
-    m.player.source = source
     m.player.configuration = configuration
+    m.player.source = source
+
 end function
 
 function OnKeyEvent(key, press) as Boolean
