@@ -908,7 +908,6 @@ function onVerizonConfigurationChanged()
 
     m.player.configuration = configuration
     m.player.source = source
-
 end function
 
 function OnKeyEvent(key, press) as Boolean

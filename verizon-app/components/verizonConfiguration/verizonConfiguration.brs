@@ -276,7 +276,6 @@ function changeSource(list, dataObj, id)
     m.configuration = configuration
     m.configurationChanged = true
     m.source = source
-
 end function
 
 function restartSourcetTimer()
