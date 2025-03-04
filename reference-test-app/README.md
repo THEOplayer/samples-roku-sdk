@@ -19,6 +19,7 @@ The channel presents a list of media to play using the THEOplayerSDK with the de
 - `source` directory contains the `main.brs` file, a starting point for the Roku channel.
 - `manifest` file is required by the Roku platform, contains the configuration of the Roku channel.
 - `README.md` file is available in root folder.
+- `package.sh` optional build script to make deploying easier
 
 ## Setup guide
 
@@ -47,7 +48,7 @@ The channel presents a list of media to play using the THEOplayerSDK with the de
 
 To manually deploy the app
 
-1. Go to `reference-test-app/` and zip all the folders and files (except for `build/`, `README.md` and `RELEASE.md`).
+1. Go to `reference-test-app/` and zip all the folders and files (except for `build/`, `package.sh`, `README.md` and `RELEASE.md`).
 1. Go to the Roku device IP address in a browser. When prompted, type in the Roku developer username and password for that device.
 1. Make sure you are in the Installer tab (top right corner), and upload the zip file, then click the replace or install button.
 
