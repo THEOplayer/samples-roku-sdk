@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="MainScene" extends="Scene">
+
+    <interface>
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/components/MainScene/MainScene.brs"/>
+    <script type="text/brightscript" uri="pkg:/components/configs/Content.brs"/>
+
+    <children>
+        <ComponentLibrary id="THEOsdk" uri="https://cdn.myth.theoplayer.com/roku/1.4.0/THEOplayerSDK-default.pkg" />
+        <ComponentLibrary id="THEOConvivaConnector" uri="https://cdn.myth.theoplayer.com/roku/1.4.0/THEOConvivaConnector-beta.pkg" />
+
+        <Rectangle color="0xffffff11" width="1920" height="1080"/>
+
+        <Poster id="Logo" uri="pkg:/images/logo.png" scale="[0.15, 0.15]" translation="[60,65]"/>
+
+        <Group id="SelectionGroup">
+            <RowList id="contentPosterGrid" translation="[65,150]" />
+        </Group>
+    </children>
+</component>

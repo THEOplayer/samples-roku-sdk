@@ -5,4 +5,5 @@ out
 .settings
 
 # catalog for vscode ide
-.vscode
+variables.env
+env.sh

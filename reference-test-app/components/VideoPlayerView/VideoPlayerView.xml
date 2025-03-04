@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<component name="VideoPlayerView" extends="Group" initialFocus="VideoPlayerNativeControls">
+    <interface>
+        <function name="setSource"/>
+        <function name="show"/>
+        <function name="destroy"/>
+
+        <function name="eventCallbackHandler"/>
+        <function name="callbackOnEventPlayerEnded"/>
+    </interface>
+
+    <script type="text/brightscript" uri="pkg:/components/VideoPlayerView/VideoPlayerView.brs"/>
+    <script type="text/brightscript" uri="pkg:/components/configs/Content.brs"/>
+
+    <children>
+
+        <THEOsdk:THEOplayer id="VideoPlayerNativeControls" controls="true" />
+        <THEOConvivaConnector:THEOConvivaConnector id="THEOConvivaConnector" 
+            customerKey="<MY_CUSTOMER_KEY>" 
+            gatewayUrl="<MY_GATEWAY_URL>" 
+            debug="true" />
+
+    </children>
+</component>
