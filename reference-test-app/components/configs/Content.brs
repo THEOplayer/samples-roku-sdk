@@ -37,7 +37,7 @@ function getSourceDescriptionArray() as object
             "live": false,
             "title": "Big Buck Bunny - VOD",
             "sources": {
-                "src": "https://cdn.theoplayer.com/video/big_buck_bunny_encrypted/stream-800/index.m3u8",
+                "src": "https://contentserver.prudentgiraffe.com/videos/hls/big_buck_bunny/big_buck_bunny.m3u8",
                 "type": hlsMimeType
                 
             }
