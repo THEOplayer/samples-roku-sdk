@@ -35,12 +35,16 @@ The channel presents a list of media to play using the THEOplayerSDK with the de
        "license": "<MY_THEO_LICENSE>"
    }
    ```
-1. If using Conviva, paste your client key in the THEOConvivaConnector node in `components/VideoPlayerView.xml`. If you are testing and not doing production, also add your gateway URL and you may also enable Conviva debug. If doing production, remove the `gatewayUrl` and `debug` attributes.
-   ```xml
-   <THEOConvivaConnector:THEOConvivaConnector id="THEOConvivaConnector"
-           customerKey="<MY_CUSTOMER_KEY>"
-           gatewayUrl="<MY_GATEWAY_URL>"
-           debug="true" />
+1. If using Conviva, paste your client key in the THEOConvivaConnector `configure` call in `components/VideoPlayerView.brs`. If you are testing and not doing production, also add your gateway URL and you may also enable Conviva debug. If doing production, remove the `gatewayUrl` and `debug` parameters.
+   `m.convivaConnector.callFunc("configure", m.player, "<MY_CUSTOMER_KEY>", "<MY_GATEWAY_URL>", true)`
+1. If using Comscore, paste your publisher ID and secret in the configuration object passed to the THEOComscoreConnector `configure` call in `components/VideoPlayerView.brs`.
+   ```brightscript
+   comscoreConfig = {
+        publisherId: "<MY_PUBLISHER_ID>",
+        publisherSecret: "<MY_PUBLISHER_SECRET>",
+        applicationName: "THEO Roku Reference Sample App"
+    }
+    m.comscoreConnector.callFunc("configure", m.player, comscoreConfig)
    ```
 1. If you would like to add your own content and metadata to the app, modify `components/configs/Content.brs`.
 
@@ -61,9 +65,9 @@ export ROKU_HOST=<MY_ROKU_IP>
 export ROKU_USERPASS=<MY_ROKU_PASSWORD>
 ```
 
-1. If you're on Windows and do not have the `zip` application installed, you can also use `7zip` if you have it installed by adding the following variable in your `env.sh` file:
+2. If you're on Windows and do not have the `zip` application installed, you can also use `7zip` if you have it installed by adding the following variable in your `env.sh` file:
    `export ZIP_TOOL=7zip`
-1. In a CLI, navigate to the `reference-test-app` directory and run the command `./package.sh`. The script will package and deploy the app to your Roku. On subsequent runs, all that is needed is to rerun `./package.sh`
+3. In a CLI, navigate to the `reference-test-app` directory and run the command `./package.sh`. The script will package and deploy the app to your Roku. On subsequent runs, all that is needed is to rerun `./package.sh`
 
 To use VS Code to deploy the app
 
@@ -76,4 +80,4 @@ ROKU_IP=<MY_ROKU_IP>
 ROKU_PASSWORD=<MY_ROKU_PASSWORD>
 ```
 
-1. In VS Code's Run and Debug panel, select `Debug: reference-test-app` and click the play icon next to it. VS Code will package the app and deploy it to your Roku, additionally starting a debug session for your app.
+4. In VS Code's Run and Debug panel, select `Debug: reference-test-app` and click the play icon next to it. VS Code will package the app and deploy it to your Roku, additionally starting a debug session for your app.

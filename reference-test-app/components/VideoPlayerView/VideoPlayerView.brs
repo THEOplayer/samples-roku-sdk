@@ -10,12 +10,20 @@ sub Init()
     ' Grab references to our main components
     m.player = m.top.findNode("VideoPlayerNativeControls")
     m.convivaConnector = m.top.findNode("THEOConvivaConnector")
-    m.convivaConnector.callFunc("addPlayer", m.player)
+    m.convivaConnector.callFunc("configure", m.player, "<MY_CUSTOMER_KEY>", "<MY_GATEWAY_URL>", true)
     m.convivaConnector.callFunc("monitorCdnChanges", getCdnMappings())
+
+    m.comscoreConnector = m.top.findNode("THEOComscoreConnector")
+    comscoreConfig = {
+        publisherId: "<MY_PUBLISHER_ID>",
+        publisherSecret: "<MY_PUBLISHER_SECRET>",
+        applicationName: "THEO Roku Reference Sample App"
+    }
+    m.comscoreConnector.callFunc("configure", m.player, comscoreConfig)
 
     ' License field needs to be filled in order to run THEOplayerSDK
     m.player.configuration = {
-        "license": "<MY_THEO_LICENSE>"
+        license: "<MY_THEO_LICENSE>"
     }
 
     m.inAdBreak = false
@@ -77,7 +85,12 @@ sub setSource( sourceDescription as object )
 
     contentMetadata = generateContentMetadata(sourceDescription)
 
-    m.convivaConnector.callFunc("startSession", contentMetadata)
+    mediaType = m.comscoreConnector.MEDIA_TYPES.SHORT_FORM_ON_DEMAND
+    if sourceDescription.live
+        mediaType = m.comscoreConnector.MEDIA_TYPES.LIVE
+    end if
+    m.comscoreConnector.callFunc("startSession", mediaType, contentMetadata.comscore)
+    m.convivaConnector.callFunc("startSession", contentMetadata.conviva)
 end sub
 
 ' Show the component.
@@ -105,12 +118,15 @@ function OnKeyEvent(key, press) as Boolean
         else if m.player.visible = true and key = "back"
             m.player.source = Invalid
             m.convivaConnector.callFunc("endSession")
+            m.comscoreConnector.callFunc("endSession")
         else if key = "up"
             m.inAdBreak = NOT m.inAdBreak
             if m.inAdBreak
                 m.convivaConnector.callFunc("onAdBreakBegin", {})
+                m.comscoreConnector.callFunc("onAdBreakBegin", {})
             else
                 m.convivaConnector.callFunc("onAdBreakEnd", {})
+                m.comscoreConnector.callFunc("onAdBreakEnd", {})
             end if
         end if
     end if
@@ -125,4 +141,5 @@ end function
 sub callbackOnEventPlayerEnded(eventData)
     eventCallbackHandler(eventData)
     m.convivaConnector.callFunc("endSession")
+    m.comscoreConnector.callFunc("endSession")
 end sub

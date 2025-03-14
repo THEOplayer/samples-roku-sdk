@@ -9,8 +9,9 @@
     <script type="text/brightscript" uri="pkg:/components/configs/Content.brs"/>
 
     <children>
-        <ComponentLibrary id="THEOsdk" uri="https://cdn.myth.theoplayer.com/roku/1.4.0/THEOplayerSDK-default.pkg" />
-        <ComponentLibrary id="THEOConvivaConnector" uri="https://cdn.myth.theoplayer.com/roku/1.4.0/THEOConvivaConnector-beta.pkg" />
+        <ComponentLibrary id="THEOsdk" uri="https://cdn.myth.theoplayer.com/roku/1.5.0/THEOplayerSDK-default.pkg" />
+        <ComponentLibrary id="THEOConvivaConnector" uri="https://cdn.myth.theoplayer.com/roku/1.5.0/THEOConvivaConnector.pkg" />
+        <ComponentLibrary id="THEOComscoreConnector" uri="https://cdn.myth.theoplayer.com/roku/1.5.0/THEOComscoreConnector.pkg" />
 
         <Rectangle color="0xffffff11" width="1920" height="1080"/>
 

@@ -16,10 +16,8 @@
     <children>
 
         <THEOsdk:THEOplayer id="VideoPlayerNativeControls" controls="true" />
-        <THEOConvivaConnector:THEOConvivaConnector id="THEOConvivaConnector" 
-            customerKey="<MY_CUSTOMER_KEY>" 
-            gatewayUrl="<MY_GATEWAY_URL>" 
-            debug="true" />
+        <THEOConvivaConnector:THEOConvivaConnector id="THEOConvivaConnector" />
+        <THEOComscoreConnector:THEOComscoreConnector id="THEOComscoreConnector" />
 
     </children>
 </component>

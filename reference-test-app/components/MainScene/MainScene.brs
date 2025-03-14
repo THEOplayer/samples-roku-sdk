@@ -7,7 +7,9 @@
 ' @since version 1.0.0
 sub Init()
     m.THEOsdkLoaded = false
-    m.THEOConnectorLoaded = false
+    m.allLibrariesLoaded = false
+    m.librariesToLoad = ["THEOConvivaConnector", "THEOComscoreConnector"]
+    m.loadedLibraries = []
 
     initPosterGrid()
     populatePosterGrid()
@@ -19,8 +21,10 @@ sub Init()
     m.theoSDKComponentLibrary = m.top.findNode("THEOsdk")
 	m.theoSDKComponentLibrary.observeField("loadStatus", "onSdkComponentLibraryLoaded")
     
-    m.theoConvivaConnectorComponentLibrary = m.top.findNode("THEOConvivaConnector")
-	m.theoConvivaConnectorComponentLibrary.observeField("loadStatus", "onConnectorComponentLibraryLoadStatusChanged")
+    for each libraryName in m.librariesToLoad
+        libraryNode = m.top.findNode(libraryName)
+        libraryNode.observeField("loadStatus", "onLibraryLoadStatusChanged")
+    end for
 end sub
 
 sub initPosterGrid()
@@ -59,14 +63,24 @@ sub onSdkComponentLibraryLoaded()
 	end if
 end sub
 
-sub onConnectorComponentLibraryLoadStatusChanged()
-    if m.theoConvivaConnectorComponentLibrary.loadStatus = "ready"
-        m.THEOConnectorLoaded = true
-		? "Connector component library has loaded properly."
-    else if m.theoConvivaConnectorComponentLibrary.loadStatus = "failed"
-        m.THEOConnectorLoaded = false
-		? "Failed to load connector component library. Please check the URL. "; m.theoConvivaConnectorComponentLibrary.uri
-	end if
+sub onLibraryLoadStatusChanged(event as object)
+    libraryNode = event.getROSGNode()
+
+    if libraryNode = invalid
+        return
+    end if
+
+    libraryName = libraryNode.id
+    if libraryNode.loadStatus = "ready"
+        m.loadedLibraries.push(libraryName)
+        ? "Component library " + libraryName + " is loaded properly."
+        if m.loadedLibraries.count() = m.librariesToLoad.count()
+            ? "All component libraries loaded"
+            m.allLibrariesLoaded = true
+        end if
+    else if libraryNode.loadStatus = "failed"
+        ? "Failed to load component library " + libraryName + ", please check URL. "; libraryNode.uri
+    end if
 end sub
 
 ' Handle an item being selected in the grid of media assets
@@ -82,7 +96,7 @@ end sub
 '
 ' @since version 1.0.0
 sub onMediaPlayRequest(sourceDescription as object)
-    if m.THEOsdkLoaded and m.THEOConnectorLoaded
+    if m.THEOsdkLoaded and m.allLibrariesLoaded
         m.videoPlayerView = CreateObject("roSGNode", "VideoPlayerView")
         m.top.appendChild(m.videoPlayerView)
         
@@ -90,7 +104,7 @@ sub onMediaPlayRequest(sourceDescription as object)
         m.groupSelectionUI.visible = false
         m.videoPlayerView.callFunc("show")
     else
-        ? "Failed to load THEOsdk or THEOConvivaConnector, please make sure that URLs for the libraries are correct."
+        ? "Failed to load THEOsdk or connectors, please make sure that URLs for the libraries are correct."
     end if
 end sub
 

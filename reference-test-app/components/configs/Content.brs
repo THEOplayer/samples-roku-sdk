@@ -48,7 +48,7 @@ function getSourceDescriptionArray() as object
 end function
 
 
-function generateContentMetadata( sourceDescription as object ) as object
+function generateContentMetadata(sourceDescription as object) as object
     if sourceDescription.live
         contentType = "DVR"
     else
@@ -63,20 +63,44 @@ function generateContentMetadata( sourceDescription as object ) as object
             showTitle: sourceDescription.title,
         }
     }
-    contentMetadata = { 
-        customMetadata: { myCustomTag: "THEO Roku SDK", c3: c3 }, 
-        playerName: "THEO Roku Reference Test Player", 
-        assetName: sourceDescription.title, 
+    convivaMetadata = {
+        customMetadata: { myCustomTag: "THEO Roku SDK", c3: c3 },
+        playerName: "THEO Roku Reference Sample App",
+        assetName: sourceDescription.title,
         encodedFramerate: 24
     }
 
-    return contentMetadata
+    nullValue = "*null"
+    duration = 3600000
+    if sourceDescription.live = false
+        duration = 600000
+    end if
+    comscoreMetadata = {
+        adLoadFlag: false,
+        assetId: c3.cm.assetId,
+        clipLength: duration,
+        completeEpisodeFlag: false,
+        contentGenre: nullValue,
+        digitalAirDate: nullValue,
+        episodeNumber: nullValue,
+        episodeSeasonNumber: nullValue,
+        episodeTitle: sourceDescription.title,
+        programTitle: nullValue,
+        publisherBrandName: nullValue,
+        stationTitle: nullValue,
+        tvAirDate: nullValue
+    }
+
+    return {
+        conviva: convivaMetadata,
+        comscore: comscoreMetadata
+    }
 end function
 
 function getCdnMappings()
     return {
         akamai: ["akamaized.net"],
-        theo: ["cdn.theoplayer.com", "theoads.live"]
+        theo: ["cdn.theoplayer.com", "theoads.live", "prudentgiraffe.com"]
         unifiedStreaming: ["demo.unified-streaming.com"]
     }
 end function
