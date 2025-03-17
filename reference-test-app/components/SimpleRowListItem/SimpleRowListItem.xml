@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="SimpleRowListItem" extends="Group">
+ 
+  <interface> 
+    <field id="itemContent" type="node" onChange="itemContentChanged"/> 
+  </interface>
+  
+  <script type="text/brightscript" uri="pkg:/components/SimpleRowListItem/SimpleRowListitem.brs" />
+  <children>
+      <LayoutGroup layoutDirection="vert" vertAlignment="top" itemSpacings="20" translation="[0,0]" >
+          <Poster id="itemImage" translation="[0,0]" width="392" height="296" />
+          <Label id="itemText" horizAlign="center" translation="[0,0]" font="font:MediumSystemFont" width="392" height="65" />
+      </LayoutGroup>
+  </children>
+
+</component>
