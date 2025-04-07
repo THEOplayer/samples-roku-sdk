@@ -1,0 +1,37 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "npx bsc"
+    },
+    {
+      "label": "package-sdk",
+      "type": "shell",
+      "command": "./package.sh"
+    },
+    {
+      "label": "package-connector",
+      "type": "shell",
+      "command": "./package.sh",
+      "options": { "cwd": "./connectors" },
+      "args": ["${input:connectorName}"]
+    },
+    {
+      "label": "build-connector-and-sdk",
+      "type": "shell",
+      "dependsOn": ["package-connector", "package-sdk"],
+      "dependsOrder": "sequence"
+    }
+  ],
+  "inputs": [
+    {
+      "type": "pickString",
+      "id": "connectorName",
+      "description": "Which connector do you want to compile?",
+      "options": ["THEOConvivaConnector"],
+      "default": "THEOConvivaConnector"
+    }
+  ]
+}
