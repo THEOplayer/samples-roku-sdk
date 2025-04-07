@@ -14,8 +14,8 @@ Table of contents:
 ## Directory structure
 
 - `basic-playback-app`: this directory contains the reference application for basic playback.
-- `verizon-app`: this directory contains the reference application for Verizon-based streams. This application also contains a basic showcase of features related to the Verizon Media Platform.
-- [`reference-test-app`](reference-test-app/README.md): this directory contains the reference application for testing with the THEOplayer SDK and THEOConvivaConnector. This application also has multiple media sources to play. NOTE: this is only for Roku SDK earlier than 9.0.
+- `verizon-app`: this directory contains the reference application for Verizon-based streams. This application also contains a basic showcase of features related to the Verizon Media Platform. NOTE: this is only for Roku SDK earlier than 9.0.
+- [`reference-test-app`](reference-test-app/README.md): this directory contains the reference application for testing with the THEOplayer SDK and THEOConvivaConnector. This application also has multiple media sources to play.
 - [`hello-world`](hello-world/README.md): this directory contains a modified version of Roku's `hello-world` sample channel.
   This sample channel is related to our official [getting started guide](https://docs.theoplayer.com/getting-started/01-sdks/09-roku/00-getting-started.md) on the THEOplayer Roku SDK.
 - `README.md`: this file is available in the root folder.
