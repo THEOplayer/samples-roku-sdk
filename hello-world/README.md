@@ -30,13 +30,11 @@ Table of contents:
 
 1. Clone (or download) this repository.
 2. Get the THEOplayer Roku SDK from [https://portal.theoplayer.com](https://portal.theoplayer.com). The SDK is a `.pkg` package.
-3. Place the downloaded package into this `hello-world` folder, and rename it to `THEOplayerSDK.pkg`.
+3. Place the downloaded package into this `hello-world/components` folder, and rename it to `THEOplayerSDK.pkg`.
 4. Paste the THEOplayer license in the chosen reference application files instead of the blank string:
-    ```brightscript
-    m.player.configuration = {
-        "license": ""
-    }
-    ```
+   ```brightscript
+   m.player.callFunc("configure", {"license": ""})
+   ```
 
-Documentation on how to deploy (or publish) this reference application is excluded. 
+Documentation on how to deploy (or publish) this reference application is excluded.
 Refer to Roku's article on ["Developer environment setup"](https://developer.roku.com/docs/developer-program/getting-started/developer-setup.md) for more information.
