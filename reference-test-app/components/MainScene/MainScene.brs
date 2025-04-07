@@ -8,7 +8,7 @@
 sub Init()
     m.THEOsdkLoaded = false
     m.allLibrariesLoaded = false
-    m.librariesToLoad = ["THEOConvivaConnector", "THEOComscoreConnector"]
+    m.librariesToLoad = ["THEOConvivaConnector", "THEOComscoreConnector", "THEOAEPConnector"]
     m.loadedLibraries = []
 
     initPosterGrid()

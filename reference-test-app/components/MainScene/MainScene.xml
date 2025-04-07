@@ -12,6 +12,8 @@
         <ComponentLibrary id="THEOsdk" uri="https://cdn.myth.theoplayer.com/roku/9.0.0/THEOplayerSDK.pkg" />
         <ComponentLibrary id="THEOConvivaConnector" uri="https://cdn.myth.theoplayer.com/roku/9.0.0/THEOConvivaConnector.pkg" />
         <ComponentLibrary id="THEOComscoreConnector" uri="https://cdn.myth.theoplayer.com/roku/9.0.0/THEOComscoreConnector.pkg" />
+        <!-- <ComponentLibrary id="THEOAEPConnector" uri="https://cdn.myth.theoplayer.com/roku/9.1.0/THEOAEPConnector.pkg" /> -->
+        <ComponentLibrary id="THEOAEPConnector" uri="pkg:/components/THEOAEPConnector.pkg" />
 
         <Rectangle color="0xffffff11" width="1920" height="1080"/>
 

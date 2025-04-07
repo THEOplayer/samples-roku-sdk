@@ -51,8 +51,10 @@ end function
 function generateContentMetadata(sourceDescription as object) as object
     if sourceDescription.live
         contentType = "DVR"
+        aepContentType = "Live"
     else
         contentType = "VOD"
+        aepContentType = contentType
     end if
 
     c3 = {
@@ -91,9 +93,18 @@ function generateContentMetadata(sourceDescription as object) as object
         tvAirDate: nullValue
     }
 
+    aepSessionDetails = {
+        name: "12345", 
+        friendlyName: sourceDescription.title,
+        streamType: "video",
+        contentType: aepContentType,
+        length: duration / 1000
+    }
+
     return {
-        conviva: convivaMetadata,
-        comscore: comscoreMetadata
+        aep: aepSessionDetails,
+        comscore: comscoreMetadata,
+        conviva: convivaMetadata
     }
 end function
 
