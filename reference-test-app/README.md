@@ -46,6 +46,11 @@ The channel presents a list of media to play using the THEOplayerSDK with the de
     }
     m.comscoreConnector.callFunc("configure", m.player, comscoreConfig)
    ```
+1. If using Adobe Edge analytics, fill in the configuration object passed to the THEOAEPConnector `configure` call in `components/VideoPlayerView.brs`.
+   ```brightscript
+   aepConfig = {configId: "<MY_CONFIG_ID>", domainName: "<MY_EDGE_DOMAIN>", mediaChannel: "My Channel", mediaPlayerName: "My Player", mediaAppVersion: "1.0", logLevel: 3 }
+    m.aepConnector.callFunc("configure", m.player, aepConfig)
+   ```
 1. If you would like to add your own content and metadata to the app, modify `components/configs/Content.brs`.
 
 ### Deploying the reference app
