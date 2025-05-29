@@ -17,3 +17,6 @@ requires_verimatrix_version=1.0
 requires_widevine_drm=1
 requires_widevine_version=1.0
 supports_input_launch=1
+
+# Informs the sdk uses "roku_ads_lib"
+bs_libs_required=roku_ads_lib
