@@ -4,7 +4,7 @@
     <function name="onPlaying"/>
   </interface>
   <children>
-    <ComponentLibrary id="THEOsdk" uri="pkg:/THEOplayerSDK.pkg"/>
+    <ComponentLibrary id="THEOsdk" uri="pkg:/components/THEOplayerSDK.pkg"/>
     <Group id="THEOplayerContainer"></Group>
   </children>
 <script type="text/brightscript">
@@ -17,9 +17,7 @@
     m.THEOplayer = CreateObject("RoSGNode","THEOsdk:THEOplayer")
     m.playerContainer = m.top.findNode("THEOplayerContainer")
     m.playerContainer.appendChild(m.THEOplayer)
-    m.THEOplayer.configuration = {
-      "license": ""
-    }
+    m.THEOplayer.callFunc( "configure", {license: ""} )
     m.THEOplayer.source = {
       "sources": [
         {
@@ -29,8 +27,7 @@
       ]
     }
     m.THEOplayer.setFocus(true)
-    m.THEOplayer.listener = m.top
-    m.THEOplayer.callFunc("addEventListener", "playing", "onPlaying")
+    m.THEOplayer.callFunc("addEventListener", "playing", m.top, "onPlaying")
     m.THEOplayer.callFunc("play")
   end function
 

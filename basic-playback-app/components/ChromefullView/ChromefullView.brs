@@ -11,31 +11,27 @@ function Init()
     uiRes = m.top.getScene().currentDesignResolution
     m.player = m.top.findNode("VideoPlayerChromefull")
     ' license field needs to be filled in order to run THEOplayerSDK
-    m.player.configuration = {
-        "license": ""
-    }
-    ' simply testing removeEventListener works'
-    m.player.listener = m.top
+    m.player.callFunc("configure", { license: "" })
 
-    m.player.callFunc("addEventListener", m.player.Event.addedaudiotrack, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.addedtexttrack, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.bitratechange, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.canplay, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.canplaythrough, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.destroy, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.durationchange, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.emptied, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.ended, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.error, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.loadeddata, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.loadedmetadata, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.pause, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.play, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.playing, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.seeked, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.seeking, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.sourcechange, "eventCallbackHandler")
-    m.player.callFunc("addEventListener", m.player.Event.timeupdate, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.addedaudiotrack, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.addedtexttrack, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.bitratechange, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.canplay, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.canplaythrough, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.destroy, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.durationchange, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.emptied, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.ended, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.error, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.loadeddata, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.loadedmetadata, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.pause, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.play, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.playing, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.seeked, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.seeking, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.sourcechange, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.timeupdate, m.top, "eventCallbackHandler")
 
 end function
 

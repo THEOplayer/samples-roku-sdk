@@ -22,9 +22,7 @@ sub Init()
     m.comscoreConnector.callFunc("configure", m.player, comscoreConfig)
 
     ' License field needs to be filled in order to run THEOplayerSDK
-    m.player.configuration = {
-        license: "<MY_THEO_LICENSE>"
-    }
+    m.player.callFunc("configure", { license: "<MY_THEO_LICENSE>" })
 
     m.inAdBreak = false
 
@@ -32,28 +30,26 @@ sub Init()
 end sub
 
 sub addPlayerEventListeners()
-    m.player.listener = m.top
+    m.player.callFunc("addEventListener", m.player.Event.ended, m.top, "callbackOnEventPlayerEnded")
 
-    m.player.callFunc("addEventListener", m.player.Event.ended, "callbackOnEventPlayerEnded")
-
-    m.player.callFunc("addEventListener", m.player.Event.addedaudiotrack, "eventCallbackHandler", m.top)
-    m.player.callFunc("addEventListener", m.player.Event.addedtexttrack, "eventCallbackHandler", m.top)
-    m.player.callFunc("addEventListener", m.player.Event.bitratechange, "eventCallbackHandler", m.top)
-    m.player.callFunc("addEventListener", m.player.Event.canplay, "eventCallbackHandler", m.top)
-    m.player.callFunc("addEventListener", m.player.Event.canplaythrough, "eventCallbackHandler", m.top)
-    m.player.callFunc("addEventListener", m.player.Event.destroy, "eventCallbackHandler", m.top)
-    m.player.callFunc("addEventListener", m.player.Event.durationchange, "eventCallbackHandler", m.top)
-    m.player.callFunc("addEventListener", m.player.Event.emptied, "eventCallbackHandler", m.top)
-    m.player.callFunc("addEventListener", m.player.Event.error, "eventCallbackHandler", m.top)
-    m.player.callFunc("addEventListener", m.player.Event.loadeddata, "eventCallbackHandler", m.top)
-    m.player.callFunc("addEventListener", m.player.Event.loadedmetadata, "eventCallbackHandler", m.top)
-    m.player.callFunc("addEventListener", m.player.Event.pause, "eventCallbackHandler", m.top)
-    m.player.callFunc("addEventListener", m.player.Event.play, "eventCallbackHandler", m.top)
-    m.player.callFunc("addEventListener", m.player.Event.playing, "eventCallbackHandler", m.top)
-    m.player.callFunc("addEventListener", m.player.Event.seeked, "eventCallbackHandler", m.top)
-    m.player.callFunc("addEventListener", m.player.Event.seeking, "eventCallbackHandler", m.top)
-    m.player.callFunc("addEventListener", m.player.Event.sourcechange, "eventCallbackHandler", m.top)
-    ' m.player.callFunc("addEventListener", m.player.Event.timeupdate, "eventCallbackHandler", m.top)
+    m.player.callFunc("addEventListener", m.player.Event.addedaudiotrack, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.addedtexttrack, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.bitratechange, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.canplay, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.canplaythrough, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.destroy, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.durationchange, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.emptied, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.error, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.loadeddata, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.loadedmetadata, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.pause, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.play, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.playing, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.seeked, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.seeking, m.top, "eventCallbackHandler")
+    m.player.callFunc("addEventListener", m.player.Event.sourcechange, m.top, "eventCallbackHandler")
+    ' m.player.callFunc("addEventListener", m.player.Event.timeupdate, m.top, "eventCallbackHandler")
 end sub
 
 ' callback for all events fired in THEOplayerSDK, displays event name and data
@@ -70,6 +66,9 @@ end sub
 sub destroy()
     m.convivaConnector.callFunc("destroy")
     m.convivaConnector = Invalid
+
+    m.comscoreConnector.callFunc("destroy")
+    m.comscoreConnector = Invalid
 
     m.player.callFunc("destroy")
     m.player = Invalid

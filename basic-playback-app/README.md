@@ -10,16 +10,16 @@ Table of contents:
 
 The channel presents a THEOplayer with two main options:
 
- - chromeless: view THEOplayer without the default playback controls.
- - chromefull: view THEOplayer with the default, slightly customized Roku Video UI.
- 
+- chromeless: view THEOplayer without the default playback controls.
+- chromefull: view THEOplayer with the default, slightly customized Roku Video UI.
+
 ## Directory structure
 
- - `components` contains all the components of basic playback reference application.
- - `images` directory contains the channel artworks.
- - `source` directory contains the `main.brs` file, a starting point for the Roku channel.
- - `manifest` file is required by the Roku platform, contains the configuration of the Roku channel.
- - `README.md` file is available in the root folder.
+- `components` contains all the components of basic playback reference application.
+- `images` directory contains the channel artworks.
+- `source` directory contains the `main.brs` file, a starting point for the Roku channel.
+- `manifest` file is required by the Roku platform, contains the configuration of the Roku channel.
+- `README.md` file is available in the root folder.
 
 ## Setup guide
 
@@ -32,13 +32,11 @@ The channel presents a THEOplayer with two main options:
 2. Get the THEOplayer Roku SDK from [https://portal.theoplayer.com](https://portal.theoplayer.com). The SDK is a `.pkg` package.
 3. Place the downloaded package into `basic-playback-app/components/` and rename it to `THEOplayerSDK.pkg`.
 4. Paste the THEOplayer license in `basic-playback-app/components/ChromefullView/ChromefullView.brs` and `basic-playback-app/components/ChromelessView/ChromelessView.brs` instead of the blank string:
-    ```brightscript
-    m.player.configuration = {
-        "license": ""
-    }
-    ```
+   ```brightscript
+   m.player.callFunc("configure", {"license": ""})
+   ```
 
-Documentation on how to deploy (or publish) this reference application is excluded. 
+Documentation on how to deploy (or publish) this reference application is excluded.
 Refer to Roku's article on ["Developer environment setup"](https://developer.roku.com/docs/developer-program/getting-started/developer-setup.md) for more information.
 
 Note: there's a video at [https://www.theoplayer.com/blog/rolling-out-roku-theoplayer](https://www.theoplayer.com/blog/rolling-out-roku-theoplayer) demonstrating these four steps.
