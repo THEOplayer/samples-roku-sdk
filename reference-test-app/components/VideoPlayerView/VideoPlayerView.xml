@@ -18,6 +18,7 @@
         <THEOsdk:THEOplayer id="VideoPlayerNativeControls" controls="true" />
         <THEOConvivaConnector:THEOConvivaConnector id="THEOConvivaConnector" />
         <THEOComscoreConnector:THEOComscoreConnector id="THEOComscoreConnector" />
+        <THEOAEPConnector:THEOAEPConnector id="THEOAEPConnector" />
 
     </children>
 </component>

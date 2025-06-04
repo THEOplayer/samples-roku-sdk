@@ -21,6 +21,13 @@ sub Init()
     }
     m.comscoreConnector.callFunc("configure", m.player, comscoreConfig)
 
+    m.aepConnector = m.top.findNode("THEOAEPConnector")
+    aepConfig = {configId: "<MY_CONFIG_ID>", domainName: "<MY_EDGE_DOMAIN>", mediaChannel: "My Channel", mediaPlayerName: "My Player", mediaAppVersion: "1.0", logLevel: 3 }
+    m.aepConnector.callFunc("configure", m.player, aepConfig)
+    m.aepConnector.observeField("ecid", "_onECIDChanged")
+    m.aepConnector.callFunc("getExperienceCloudId", _onECIDChanged, m)
+    m.aepConnector.callFunc("updateUserConsent", "y")
+
     ' License field needs to be filled in order to run THEOplayerSDK
     m.player.callFunc("configure", { license: "<MY_THEO_LICENSE>" })
 
@@ -70,6 +77,9 @@ sub destroy()
     m.comscoreConnector.callFunc("destroy")
     m.comscoreConnector = Invalid
 
+    m.aepConnector.callFunc("destroy")
+    m.aepConnector = Invalid
+
     m.player.callFunc("destroy")
     m.player = Invalid
 end sub
@@ -90,6 +100,7 @@ sub setSource( sourceDescription as object )
     end if
     m.comscoreConnector.callFunc("startSession", mediaType, contentMetadata.comscore)
     m.convivaConnector.callFunc("startSession", contentMetadata.conviva)
+    m.aepConnector.callFunc("startSession", contentMetadata.aep)
 end sub
 
 ' Show the component.
@@ -118,20 +129,27 @@ function OnKeyEvent(key, press) as Boolean
             m.player.source = Invalid
             m.convivaConnector.callFunc("endSession")
             m.comscoreConnector.callFunc("endSession")
+            m.aepConnector.callFunc("endSession")
         else if key = "up"
             m.inAdBreak = NOT m.inAdBreak
             if m.inAdBreak
                 m.convivaConnector.callFunc("onAdBreakBegin", {})
                 m.comscoreConnector.callFunc("onAdBreakBegin", {})
+                m.aep.callFunc("onAdBreakBegin", {})
             else
                 m.convivaConnector.callFunc("onAdBreakEnd", {})
                 m.comscoreConnector.callFunc("onAdBreakEnd", {})
+                m.aepConnector.callFunc("onAdBreakEnd", {})
             end if
         end if
     end if
 
     return handled
 end function
+
+sub _onECIDChanged(event as object)
+    print "Adobe ECID updated"; m.aepConnector.ecid
+end sub
 
 ' When the video has ended, end the conviva session
 '
@@ -141,4 +159,5 @@ sub callbackOnEventPlayerEnded(eventData)
     eventCallbackHandler(eventData)
     m.convivaConnector.callFunc("endSession")
     m.comscoreConnector.callFunc("endSession")
+    m.aepConnector.callFunc("endSession")
 end sub

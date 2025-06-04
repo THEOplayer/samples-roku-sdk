@@ -3,6 +3,12 @@ function getSourceDescriptionArray() as object
     defaultPosterUrl = "http://devtools.web.roku.com/samples/images/Landscape_1.jpg"
     hlsMimeType = "application/x-mpegurl"
     dashMimeType = "application/dash+xml"
+
+    vodAdSource = {
+            integration: "csai",
+            sources: "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/vmap_ad_samples&sz=640x480&cust_params=sample_ar%3Dpremidpost&ciu_szs=300x250&gdfp_req=1&ad_rule=1&output=vmap&unviewed_position_start=1&env=vp&impl=s&cmsid=496&vid=short_onecue&correlator=",
+    }
+
     content = [
         {
             "poster": defaultPosterUrl,
@@ -25,12 +31,12 @@ function getSourceDescriptionArray() as object
         {
             "poster": defaultPosterUrl,
             "live": false,
-            "title": "Audio Only - VOD"
+            "title": "Angel One - VOD",
             "sources": {
-                "src": "https://cdn.theoplayer.com/video/indexcom/index.m3u8",
-                "type": hlsMimeType
-                
-            }
+                "src": "https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd",
+                "type": dashMimeType
+            },
+            "ads": [vodAdSource]
         },
         {
             "poster": defaultPosterUrl,
@@ -39,8 +45,18 @@ function getSourceDescriptionArray() as object
             "sources": {
                 "src": "https://contentserver.prudentgiraffe.com/videos/hls/big_buck_bunny/big_buck_bunny.m3u8",
                 "type": hlsMimeType
-                
-            }
+            },
+            "ads": [vodAdSource]
+        },
+        {
+            "poster": defaultPosterUrl,
+            "live": false,
+            "title": "Audio Only - VOD"
+            "sources": {
+                "src": "https://cdn.theoplayer.com/video/indexcom/index.m3u8",
+                "type": hlsMimeType
+            },
+            "ads": [vodAdSource]
         }
     ]
 
@@ -51,8 +67,10 @@ end function
 function generateContentMetadata(sourceDescription as object) as object
     if sourceDescription.live
         contentType = "DVR"
+        aepContentType = "Live"
     else
         contentType = "VOD"
+        aepContentType = contentType
     end if
 
     c3 = {
@@ -91,9 +109,18 @@ function generateContentMetadata(sourceDescription as object) as object
         tvAirDate: nullValue
     }
 
+    aepSessionDetails = {
+        name: "12345", 
+        friendlyName: sourceDescription.title,
+        streamType: "video",
+        contentType: aepContentType,
+        length: duration / 1000
+    }
+
     return {
-        conviva: convivaMetadata,
-        comscore: comscoreMetadata
+        aep: aepSessionDetails,
+        comscore: comscoreMetadata,
+        conviva: convivaMetadata
     }
 end function
 
