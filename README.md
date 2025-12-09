@@ -32,9 +32,7 @@ Table of contents:
 3. Place the downloaded package into `verizon-app/components/` or `basic-playback-app/components/` and rename it to `THEOplayerSDK.pkg`.
 4. Paste the THEOplayer license in the chosen reference application files instead of the blank string:
    ```brightscript
-   m.player.configuration = {
-       "license": ""
-   }
+   m.player.callFunc("configure", { license: "" })
    ```
 
 Documentation on how to deploy (or publish) this reference application is excluded.
