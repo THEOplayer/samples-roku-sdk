@@ -13,13 +13,13 @@ sub Init()
     m.convivaConnector.callFunc("configure", m.player, "<MY_CUSTOMER_KEY>", "<MY_GATEWAY_URL>", true)
     m.convivaConnector.callFunc("monitorCdnChanges", getCdnMappings())
 
-    m.comscoreConnector = m.top.findNode("THEOComscoreConnector")
-    comscoreConfig = {
-        publisherId: "<MY_PUBLISHER_ID>",
-        publisherSecret: "<MY_PUBLISHER_SECRET>",
-        applicationName: "THEO Roku Reference Sample App"
-    }
-    m.comscoreConnector.callFunc("configure", m.player, comscoreConfig)
+    ' m.comscoreConnector = m.top.findNode("THEOComscoreConnector")
+    ' comscoreConfig = {
+    '     publisherId: "<MY_PUBLISHER_ID>",
+    '     publisherSecret: "<MY_PUBLISHER_SECRET>",
+    '     applicationName: "THEO Roku Reference Sample App"
+    ' }
+    ' Disabling ### m.comscoreConnector.callFunc("configure", m.player, comscoreConfig)
 
     ' License field needs to be filled in order to run THEOplayerSDK
     m.player.callFunc("configure", { license: "<MY_THEO_LICENSE>" })
@@ -67,8 +67,8 @@ sub destroy()
     m.convivaConnector.callFunc("destroy")
     m.convivaConnector = Invalid
 
-    m.comscoreConnector.callFunc("destroy")
-    m.comscoreConnector = Invalid
+    ' m.comscoreConnector.callFunc("destroy")
+    ' m.comscoreConnector = Invalid
 
     m.player.callFunc("destroy")
     m.player = Invalid
@@ -84,11 +84,11 @@ sub setSource( sourceDescription as object )
 
     contentMetadata = generateContentMetadata(sourceDescription)
 
-    mediaType = m.comscoreConnector.MEDIA_TYPES.SHORT_FORM_ON_DEMAND
-    if sourceDescription.live
-        mediaType = m.comscoreConnector.MEDIA_TYPES.LIVE
-    end if
-    m.comscoreConnector.callFunc("startSession", mediaType, contentMetadata.comscore)
+    ' mediaType = m.comscoreConnector.MEDIA_TYPES.SHORT_FORM_ON_DEMAND
+    ' if sourceDescription.live
+    '     mediaType = m.comscoreConnector.MEDIA_TYPES.LIVE
+    ' end if
+    ' m.comscoreConnector.callFunc("startSession", mediaType, contentMetadata.comscore)
     m.convivaConnector.callFunc("startSession", contentMetadata.conviva)
 end sub
 
@@ -117,15 +117,15 @@ function OnKeyEvent(key, press) as Boolean
         else if m.player.visible = true and key = "back"
             m.player.source = Invalid
             m.convivaConnector.callFunc("endSession")
-            m.comscoreConnector.callFunc("endSession")
+            ' m.comscoreConnector.callFunc("endSession")
         else if key = "up"
             m.inAdBreak = NOT m.inAdBreak
             if m.inAdBreak
                 m.convivaConnector.callFunc("onAdBreakBegin", {})
-                m.comscoreConnector.callFunc("onAdBreakBegin", {})
+                ' m.comscoreConnector.callFunc("onAdBreakBegin", {})
             else
                 m.convivaConnector.callFunc("onAdBreakEnd", {})
-                m.comscoreConnector.callFunc("onAdBreakEnd", {})
+                ' m.comscoreConnector.callFunc("onAdBreakEnd", {})
             end if
         end if
     end if
@@ -140,5 +140,5 @@ end function
 sub callbackOnEventPlayerEnded(eventData)
     eventCallbackHandler(eventData)
     m.convivaConnector.callFunc("endSession")
-    m.comscoreConnector.callFunc("endSession")
+    ' m.comscoreConnector.callFunc("endSession")
 end sub
