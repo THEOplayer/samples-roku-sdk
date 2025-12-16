@@ -31,9 +31,7 @@ The channel presents a list of media to play using the THEOplayerSDK with the de
 1. Clone the reference app repository - https://github.com/THEOplayer/samples-roku-sdk.
 1. Paste the THEOplayer license in the chosen reference application files instead of the placeholder:
    ```brightscript
-   m.player.configuration = {
-       "license": "<MY_THEO_LICENSE>"
-   }
+   m.player.callFunc("configure", { license: "<MY_THEO_LICENSE>" })
    ```
 1. If using Conviva, paste your client key in the THEOConvivaConnector `configure` call in `components/VideoPlayerView.brs`. If you are testing and not doing production, also add your gateway URL and you may also enable Conviva debug. If doing production, remove the `gatewayUrl` and `debug` parameters.
    `m.convivaConnector.callFunc("configure", m.player, "<MY_CUSTOMER_KEY>", "<MY_GATEWAY_URL>", true)`
