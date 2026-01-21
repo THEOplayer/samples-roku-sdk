@@ -1,6 +1,6 @@
 ' ===== Sources and Content Metadata =====
 function getSourceDescriptionArray() as object
-    defaultPosterUrl = "http://devtools.web.roku.com/samples/images/Landscape_1.jpg"
+    defaultPosterUrl = "https://placehold.co/1920x1080.png?text=THEOplayer+Roku"
     hlsMimeType = "application/x-mpegurl"
     dashMimeType = "application/dash+xml"
     content = [
@@ -35,10 +35,20 @@ function getSourceDescriptionArray() as object
         {
             "poster": defaultPosterUrl,
             "live": false,
-            "title": "Big Buck Bunny - VOD",
+            "title": "Big Buck Bunny - HLS VOD",
             "sources": {
                 "src": "https://contentserver.prudentgiraffe.com/videos/hls/big_buck_bunny/big_buck_bunny.m3u8",
                 "type": hlsMimeType
+                
+            }
+        },
+        {
+            "poster": defaultPosterUrl,
+            "live": false,
+            "title": "Angel One - DASH VOD",
+            "sources": {
+                "src": "https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd",
+                "type": dashMimeType
                 
             }
         }
