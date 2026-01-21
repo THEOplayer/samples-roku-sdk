@@ -34,7 +34,7 @@ sub initPosterGrid()
     m.mediaGrid = m.top.findNode("contentPosterGrid")
     m.mediaGrid.itemComponentName = "SimpleRowListItem"
     m.mediaGrid.numRows = 1
-    m.mediaGrid.itemSize = [itemWidth * getSourceDescriptionArray().Count() + 20 * 2, itemHeight]
+    m.mediaGrid.itemSize = [(itemWidth + 30) * 4, itemHeight]
     m.mediaGrid.rowHeights = [itemHeight]
     m.mediaGrid.rowItemSize = [itemWidth, itemHeight]
     m.mediaGrid.itemSpacing = [ 0, 80 ]
